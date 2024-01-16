@@ -1,11 +1,8 @@
 // Types
 import type { Leaf, PeerMessage } from '@/utils/peerMessage'
-import type { MediaConnection, PeerJSOption } from 'peerjs'
+import type { Peer, MediaConnection, PeerJSOption } from 'peerjs'
 
-// Util
-import { Peer } from 'peerjs'
-
-export const useViewerPeer = defineStore('viewer-peer', () => {
+export const useViewerPeerStore = defineStore('viewerpeerstore', () => {
 
     const _peer = ref<Peer | null>()
 
@@ -21,7 +18,9 @@ export const useViewerPeer = defineStore('viewer-peer', () => {
 
     const _mediaStream = ref<MediaStream | null>(null)
 
+    // MUST be valid with https://github.com/peers/peerjs/blob/2a816c1356228c058188274d96ed28f9dabb3f8b/lib/util.ts#L121
     const selfId = ref("")
+    // MUST be valid with https://github.com/peers/peerjs/blob/2a816c1356228c058188274d96ed28f9dabb3f8b/lib/util.ts#L121
     const channelId = ref("")
     const options = ref<PeerJSOption>(defaultPeerOptions)
     // For video-player refresh trigger after after media source change
@@ -71,6 +70,8 @@ export const useViewerPeer = defineStore('viewer-peer', () => {
         // Destroy previous peer 
         if (_peer.value)
             _peer.value.destroy()
+
+        const Peer = await (await import('peerjs')).Peer
 
         _peer.value = new Peer(id, options)
     }

@@ -1,14 +1,13 @@
 // Types
-import type { PeerJSOption, MediaConnection } from 'peerjs'
+import type { Peer, PeerJSOption, MediaConnection } from 'peerjs'
 import type { PeerMessage, Leaf } from '@/utils/peerMessage'
 import type { PeerTreeData } from '@/utils/avl-tree/peerTreeData'
 
 // Utils
-import { Peer } from 'peerjs'
 import { TreeChangesListener } from '@/utils/avl-tree/treeChangesListener'
 import { AvlTree } from '@/utils/avl-tree/tree'
 
-export const useStreamerPeer = defineStore('streamer-peer', () => {
+export const useStreamerPeerStore = defineStore('streamerpeerstore', () => {
 
     const inactivityTime = 10000
 
@@ -27,6 +26,7 @@ export const useStreamerPeer = defineStore('streamer-peer', () => {
 
     // Getters/setters
 
+    // MUST be valid with https://github.com/peers/peerjs/blob/2a816c1356228c058188274d96ed28f9dabb3f8b/lib/util.ts#L121 
     const id = computed(() => _peer.value?.id ?? null)
     const destroyed = computed(() => _peer.value?.destroyed ?? true)
 
@@ -45,6 +45,8 @@ export const useStreamerPeer = defineStore('streamer-peer', () => {
     const _createPeerJs = async (id: string, options: PeerJSOption) => {
         if (_peer.value)
             _peer.value.destroy()
+
+        const Peer = await (await import('peerjs')).Peer
 
         _peer.value = new Peer(id, options)
         _setupPeer()

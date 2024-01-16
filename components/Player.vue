@@ -20,11 +20,11 @@ onMounted(() => {
         })
     }
 })
-
 </script>
+
 <template>
 <VContainer fluid class="d-flex justify-center align-center">
-    <video 
+    <video
         v-if="props.stream" 
         ref="video"
         controls 
@@ -37,3 +37,9 @@ onMounted(() => {
     ></VImg>
 </VContainer>
 </template>
+
+<style lang="sass" scoped>
+video
+    max-height: 100%
+    max-width: 100%
+</style>

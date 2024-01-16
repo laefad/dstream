@@ -1,6 +1,8 @@
 export type ClearedMediaDeviceInfo = Omit<MediaDeviceInfo, 'toJSON'>
 
-export const useMediaDevicesStore = defineStore('mediadevices', () => {
+export const useMediaDevicesStore = defineStore('mediadevicesstore', () => {
+
+    const appAlertsStore = useAppAlertsStore()
 
     const audioInputs = ref<ClearedMediaDeviceInfo[]>([])
     const videoInputs = ref<ClearedMediaDeviceInfo[]>([])
@@ -20,6 +22,10 @@ export const useMediaDevicesStore = defineStore('mediadevices', () => {
             await navigator.mediaDevices.getUserMedia({audio: true, video: true})
             mediaIsUnavailable.value = false
         } catch {
+            appAlertsStore.addAlert({
+                type: 'warning',
+                text: 'Разрешите доступ к камере и микрофону для дальнейшей работы'
+            })
             mediaIsUnavailable.value = true
         }
     }

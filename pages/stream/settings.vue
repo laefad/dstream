@@ -2,7 +2,7 @@
 import { mdiDice5Outline } from '@mdi/js'
 
 const mediaDevicesStore = useMediaDevicesStore()
-const streamerPeer = useStreamerPeer()
+const streamerPeer = useStreamerPeerStore()
 const router = useRouter()
 
 const id = ref("")

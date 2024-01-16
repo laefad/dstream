@@ -2,21 +2,7 @@
 const mediaDevicesStore = useMediaDevicesStore()
 </script>
 
-
 <template>
-<VAlert 
-    :model-value="mediaDevicesStore.mediaIsUnavailable" 
-    type="warning"
->
-    <VContainer fluid>
-        <p class="text-center">
-            Разрешите доступ к камере и микрофону для дальнейшей работы
-        </p>
-        <VImg
-            src="/images/mediaPermissions.png"
-        ></VImg>
-    </VContainer>
-</VAlert>
 <VContainer fluid>
     <ClientOnly>
         <VSelect
