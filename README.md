@@ -1,42 +1,29 @@
-# Nuxt 3 Minimal Starter
+# Prerequirements
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Install peer js server 
 
-## Setup
+```bash 
+npm install peer -g
+```
 
-Make sure to install the dependencies:
+Start it, for example 
 
 ```bash
-# yarn
-yarn install
+peerjs --port 9000 --key peerjs --path /myapp
+```
 
-# npm
+Then add this config to the utis/defaultPeerOptions.ts
+
+# Run
+
+Just build and run current application 
+
+```bash
 npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
 npm run build
-```
 
-Locally preview production build:
-
-```bash
+# For local preview 
 npm run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Then connect to the `http://localhost:3000`
